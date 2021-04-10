@@ -19,8 +19,8 @@ function createGraph(data) {
 		silverMinted.push(data[i][2]);
 	}
 
-	console.log(years);
-	console.log(silverMinted);
+	//console.log(years);
+	//console.log(silverMinted);
 
 	var chart = c3.generate({
 		bindto: '#chart',

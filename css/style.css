@@ -1,3 +1,83 @@
-body: {
-	
+.hide-div {
+    display         : none;
+}
+.pad-div {
+   padding: 10px;
+}
+.error_text {
+   /*position: absolute;*/
+   float: left;
+   margin-left: 0.5em;
+}
+.fileSelect {
+   /* float   : left; */
+   padding: 3px;
+   display : inline-block;
+}
+.uploadButton {
+   /* float   : left; */
+   display : inline-block;
+}
+.row .divContainer {
+   border  : 0px;
+   margin  : 0px;
+   padding : 0px;
+   width   : 100%;
+   display : inline-block;
+   /* margin-bottom : 1rem; */
+}
+body {
+    background-color : beige;
+    color            : black;
+}
+label {
+   display: inline-block;
+   padding: 0px 100px 0px 0px;
+}
+legend {
+    font-size   : 14pt;
+    font-weight : bold;
+    text-align  : left;
+    color: blue;
+}
+.innerLegend {
+    font-size   : 12pt;
+    font-weight : bold;
+    text-align  : left;
+    color: black;
+}
+.fieldset-background-border {
+    background-color: white;
+    padding         : 0px;
+    margin          : 0px;
+    border-width    : 2px;
+}
+
+.fieldset-last-on-page {
+    margin-bottom:0rem;
+}
+
+.scroller {
+    width : 1500px;
+    height: 750px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    scrollbar-width: auto;
+}
+
+.table {
+    width : 80%;
+    border-width : 0px;
+}
+
+#progress {
+    width : 100%;
+    background-color : beige;
+    /*border: 1px solid black;*/
+}
+
+#bar {
+    width : 0%;
+    height : 15px;
+    background-color: green;
 }

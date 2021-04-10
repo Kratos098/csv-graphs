@@ -2,10 +2,10 @@
 <html>
 	<head>
 		<title>Data Graphs</title>
-		<!-- Load css from css folder -->
+		<!-- Load css files from css folder -->
 		<link rel='stylesheet' href='css/style.css' />
-		<link rel='stylesheet' href='css/bootstrap.min.css' />
-		<link rel='stylesheet' href='css/font-awesome.min.css' />
+		<!-- <link rel='stylesheet' href='css/bootstrap.min.css' /> -->
+		<!-- <link rel='stylesheet' href='css/font-awesome.min.css' /> -->
 
 		<!-- Load c3.css -->
 		<link href="css/c3.css" rel="stylesheet" type="text/css">
@@ -16,15 +16,55 @@
 
 		<!-- Load papaparse.js -->
 		<script src="javascript/library/papaparse.min.js"></script>
+
+		<!-- Load create-table.js -->
+		<script src="javascript/create-table.js"></script>
   	</head>
 
   	<body>
-	<br><br><br>
-    	
-	<div class="container">
-    		<div id="chart"></div>
-    	</div>
+		<div style="height:auto; border-width:1px">
+			<div style="width:50%; border-width:0px;">
+				<fieldset class="li-border">
+					<legend>File Upload</legend>
+					<div class="divContainer">
+						<label>
+							<legend class="innerLegend">Data File</legend>
+							<input type="file" id="data_file" name="datafile" class="pointer fileSelect" />
+							<button id="Upload_Data_File" class="pointer uploadButton" onclick=Upload()>Upload</button>
+						</label>
+						<label>
+							<legend class="innerLegend">Data Log</legend>
+							<input type="file" id="data_log" name="datalog" class="pointer fileSelect" />
+							<button id="Upload_Data_Log" class="pointer uploadButton" onclick=Upload()>Upload</button>
+						</label>
+						<span class="error_text" id="error_data_file"></span>
+						<span class="error_text" id="error_data_log"></span>
+						<!-- <div>Uploaded: </div>
+						<div id="progress">
+							<div id="bar"></div>
+						</div> -->
+					</div>
+				</fieldset>
+			</div>
+			<div class = "pad-div"></div>
+			<!-- <div style="width:95%; border-width:0px;"> -->
+			<div class="table">
+				<fieldset class="li-border">
+					<legend>Table</legend>
+					<div class="scroller" id="table"></div>
+				</fieldset>
+				<div class = "pad-div"></div>
+				<fieldset class="li-border">
+					<legend>Charts</legend>
+						<div id="chart"></div>
+				</fieldset>
+			</div>
+		</div>
+    
+		<div class="slidecontainer">
+			<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+		</div>
 
-	<script src="javascript/create-graph.js"></script>
+		<script src="javascript/create-graph.js"></script>
   	</body>
 </html>
