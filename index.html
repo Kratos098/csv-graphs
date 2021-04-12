@@ -69,9 +69,13 @@
 			</div>
 		</div>
 
-		<script src="javascript/create-graph.js"></script>
 		<script type="text/javascript">
-			document.getElementById("data_table_button");
+			function doClick(type) {
+				var button = type == 1 ? document.getElementById("data_table_button") : document.getElementById("log_table_button")
+				button.click();
+				console.log(button);
+			}
 		</script>
+		<script src="javascript/create-graph.js"></script>
   	</body>
 </html>

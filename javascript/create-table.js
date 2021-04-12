@@ -1,10 +1,9 @@
 function UploadFile(type) {
-    // console.log(type);
     var fileUpload = type == 1 ? document.getElementById("data_file") : document.getElementById("data_log");
-    // console.log(fileUpload);
     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
     if (regex.test(fileUpload.value.toLowerCase())) {
         CreateTable(null, type);
+        doClick(type);
     } 
     else {
         alert("Please upload a valid CSV file.");
@@ -19,7 +18,6 @@ function CreateTable(evt, type) {
         tabcontent[i].style.display = "none";
     }
 
-
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
@@ -27,7 +25,6 @@ function CreateTable(evt, type) {
     
     var fileUpload = type == 1 ? document.getElementById("data_file") : document.getElementById("data_log");
     if(fileUpload.value == "") {
-        // console.log("ending");
         alert("Please upload a file!")
         return;
     }
@@ -64,11 +61,10 @@ function CreateTable(evt, type) {
     } 
     else {
         alert("This browser does not support HTML5.");
-        return
+        return;
     }
 
-    var button = type == 1 ? document.getElementById("data_table_button") : document.getElementById("log_table_button")
-    button.click();
+    doClick(type);
 }
 
 // function updateProgress(row, length) {
