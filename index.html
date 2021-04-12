@@ -15,7 +15,7 @@
 		<script src="javascript/library/c3.min.js"></script>
 
 		<!-- Load papaparse.js -->
-		<script src="javascript/library/papaparse.min.js"></script>
+		<script src="javascript/library/papaparse.min.js"></script> 
 
 		<!-- Load create-table.js -->
 		<script src="javascript/create-table.js"></script>
@@ -30,12 +30,12 @@
 						<label>
 							<legend class="innerLegend">Data File</legend>
 							<input type="file" id="data_file" name="datafile" class="pointer fileSelect" />
-							<button id="Upload_Data_File" class="pointer uploadButton" onclick=Upload()>Upload</button>
+							<button id="Upload_Data_File" class="pointer uploadButton" onclick=UploadFile(1)>Upload</button>
 						</label>
 						<label>
 							<legend class="innerLegend">Data Log</legend>
 							<input type="file" id="data_log" name="datalog" class="pointer fileSelect" />
-							<button id="Upload_Data_Log" class="pointer uploadButton" onclick=Upload()>Upload</button>
+							<button id="Upload_Data_Log" class="pointer uploadButton" onclick=UploadFile(2)>Upload</button>
 						</label>
 						<span class="error_text" id="error_data_file"></span>
 						<span class="error_text" id="error_data_log"></span>
@@ -47,11 +47,19 @@
 				</fieldset>
 			</div>
 			<div class = "pad-div"></div>
-			<!-- <div style="width:95%; border-width:0px;"> -->
-			<div class="table">
+			<div class="tables">
 				<fieldset class="li-border">
-					<legend>Table</legend>
-					<div class="scroller" id="table"></div>
+					<legend>Tables</legend>
+					<div class="tab">
+						<button class="tablinks" onclick="CreateTable(event, 1)" id="data_table_button">Data Table</button>
+						<button class="tablinks" onclick="CreateTable(event, 2)" id="log_table_button">Log Table</button>
+					</div>
+					<div id="data_table" class="tabcontent">
+						<div class="scroller" id="data_table_scroller"></div>
+					</div>
+					<div id="log_table" class="tabcontent">
+						<div class="scroller" id="log_table_scroller"></div>
+					</div>
 				</fieldset>
 				<div class = "pad-div"></div>
 				<fieldset class="li-border">
@@ -60,11 +68,10 @@
 				</fieldset>
 			</div>
 		</div>
-    
-		<div class="slidecontainer">
-			<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-		</div>
 
 		<script src="javascript/create-graph.js"></script>
+		<script type="text/javascript">
+			document.getElementById("data_table_button");
+		</script>
   	</body>
 </html>
