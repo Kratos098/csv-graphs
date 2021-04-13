@@ -4,6 +4,7 @@ function UploadFile(type) {
     if (regex.test(fileUpload.value.toLowerCase())) {
         CreateTable(null, type);
         doClick(type);
+        parseData(type, 1);
     } 
     else {
         alert("Please upload a valid CSV file.");
