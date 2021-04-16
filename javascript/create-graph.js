@@ -1,14 +1,28 @@
-function populateLists(type, results) {
-	console.log("populating lists");
+function populateLists(evt, type, results) {
+	// console.log(evt);
+	if(evt.isTrusted) {
+		return;
+	}
+	// console.log("populating lists");
 	var headers = results.data[0];
 	var selects = type == 1 ? document.getElementsByClassName("lineboxD") : document.getElementsByClassName("lineboxL");
 
-	for (var i = 0; i < selects.length; i++) {
-		var select = selects[i]
-		for (i = 0; i < select.options.length; i++) {
-			select.options[i] = null;
-		  }
+	// console.log("clearing selects");
+	// for (var i = 0; i < selects.length; i++) {
+	// 	var select = selects[i];
+	// 	for (j = 0; j < select.options.length; j++) {
+	// 		select.options[j] = null;
+	// 	}
+	// }
+	for (var i = 0; i < selects.length; i++) { 
+		var select = selects[i];
+		for(var j = select.options.length-1; j >= 0; j--) {
+			select.remove(j);
+		}
 	}
+	// console.log(selects);
+	// console.log("finished clearing selects");
+
 
 	for(var i = 0; i < selects.length; i++) {
 		for(var j = 0; j < headers.length; j++) {
@@ -25,9 +39,12 @@ function populateLists(type, results) {
 			selects[i].appendChild(el);
 		}
 	}
+
+	// console.log("finished populating lists");
 }
 
 function createGraph(type, results) {
+	// console.log("creating graph");
 	var data = results.data;
 	var lines = type == 1 ? document.getElementsByClassName("lineboxD") : document.getElementsByClassName("lineboxL") ;
 	var indices = [];
@@ -43,6 +60,7 @@ function createGraph(type, results) {
 	for(var i = 0; i < data.length; i++) {
 		line1.push(data[i][indices[0]] );
 		line2.push(data[i][indices[1]]);
+		line3.push(data[i][indices[2]]);
 		if(i > 0) { times.push((parseFloat(data[i][0]) - parseFloat(data[1][0])).toString()); }
 		else { times.push(data[i][0]); }
 	}
@@ -56,6 +74,11 @@ function createGraph(type, results) {
 	if(indices[2] == 0) {
 		line3 = [];
 	}
+
+	// console.log(indices);
+	// console.log(line1);
+	// console.log(line2);
+	// console.log(line3);
 
 	var chart = type == 1 ? document.getElementById("data_chart") : document.getElementById("log_chart");
 	c3.generate({
@@ -78,7 +101,7 @@ function createGraph(type, results) {
 	            	centered: true,
 					multiline: false,
                 	culling: {
-                    	max: 5
+                    	max: 7
                 	},
 					fit: true
             	},
@@ -97,9 +120,11 @@ function createGraph(type, results) {
 	});
 
 	// doClick(type, 2);
+	// console.log("finished creating graph");
 }
 
 function parseData(type, func, evt) {
+	// console.log("parsing data");
 	var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontentG");
     for (i = 0; i < tabcontent.length; i++) {
@@ -112,6 +137,7 @@ function parseData(type, func, evt) {
     }
     
     var fileUpload = type == 1 ? document.getElementById("data_file") : document.getElementById("data_log");
+	var filepath = fileUpload.files[0];
     if(fileUpload.value == "") {
         alert("Please upload a file!")
         return;
@@ -121,10 +147,6 @@ function parseData(type, func, evt) {
 	dvGRH.style.display = "contents";
     evt.target.className += " active";
 
-	let file = type == 1 ? document.getElementById("data_file") : document.getElementById("data_log");
-	let filepath = file.files[0];
-	console.log(filepath);
-	console.log(type, func);
 	if(filepath == undefined || filepath == null) {
 		alert("Please upload a valid CSV file.");
 	}
@@ -133,13 +155,13 @@ function parseData(type, func, evt) {
 			skipEmptyLines: true,
 			download: false,
 			complete: function(results) {
-				if(func == 1) {
-					populateLists(type, results);
-				}
-				else {
+				// if(func == 1) {
+					populateLists(evt, type, results);
 					createGraph(type, results)
-				}
+				// }
 			}
 		});
 	}
+
+	// console.log("finished parsing");
 }

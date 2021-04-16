@@ -30,12 +30,12 @@
 					<div class="divContainer">
 						<label>
 							<legend class="innerLegend">Data File</legend>
-							<input type="file" id="data_file" name="datafile" class="pointer fileSelect" />
+							<input type="file" accept=".csv" id="data_file" name="datafile" class="pointer fileSelect" />
 							<button id="Upload_Data_File" class="pointer uploadButton" onclick=UploadFile(1);>Upload</button>
 						</label>
 						<label>
 							<legend class="innerLegend">Data Log</legend>
-							<input type="file" id="data_log" name="datalog" class="pointer fileSelect" />
+							<input type="file" accept=".csv" id="data_log" name="datalog" class="pointer fileSelect" />
 							<button id="Upload_Data_Log" class="pointer uploadButton" onclick=UploadFile(2);>Upload</button>
 						</label>
 						<span class="error_text" id="error_data_file"></span>
@@ -79,7 +79,7 @@
 							<select id="line3L" class="lineboxL"> </select>
 							<button id="draw_log_graph" onclick="parseData(2, 2, event)">Graph</button>
 							<div id="log_chart"></div>
-						</div>
+						</div> 
 				</fieldset>
 			</div>
 			<div class = "pad-div"></div>
@@ -93,12 +93,15 @@
 			function doClick(type, func) {
 				var button;
 				if(func == 1) {
+					// console.log("table tab clicked by script");
 					button = type == 1 ? document.getElementById("data_table_button") : document.getElementById("log_table_button");
 				}
 				else {
+					// console.log("graph tab clicked by script");
 					button = type == 1 ? document.getElementById("data_graph_button") : document.getElementById("log_graph_button");
 				}
 				button.click();
+				// console.log("button has finished clicking");
 			}
 		</script>
   	</body>

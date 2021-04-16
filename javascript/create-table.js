@@ -1,8 +1,9 @@
 function UploadFile(type) {
+    // console.log("uploading file");
     var fileUpload = type == 1 ? document.getElementById("data_file") : document.getElementById("data_log");
     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
     if (regex.test(fileUpload.value.toLowerCase())) {
-        CreateTable(null, type);
+        // CreateTable(null, type);
         doClick(type, 1);
         doClick(type, 2);
         // parseData(1);
@@ -10,9 +11,11 @@ function UploadFile(type) {
     else {
         alert("Please upload a valid CSV file.");
     }
+    // console.log("finished uploading file")
 }
 
 function CreateTable(evt, type) {
+    // console.log("creating table");
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontentT");
     for (i = 0; i < tabcontent.length; i++) {
@@ -66,6 +69,7 @@ function CreateTable(evt, type) {
     }
 
     // doClick(type, 1);
+    // console.log("finished creating table");
 }
 
 // function updateProgress(row, length) {
