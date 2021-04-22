@@ -1,28 +1,36 @@
+
+
 function UploadFile(type) {
-    // console.log("uploading file");
+    console.log("uploading file");
     var fileUpload = type == 1 ? document.getElementById("data_file") : document.getElementById("data_log");
     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
     if (regex.test(fileUpload.value.toLowerCase())) {
-        // CreateTable(null, type);
+        displayLoader(1);
         doClick(type, 1);
         doClick(type, 2);
-        // parseData(1);
     } 
     else {
         alert("Please upload a valid CSV file.");
     }
-    // console.log("finished uploading file")
+    console.log("finished uploading file")
 }
 
 function CreateTable(evt, type) {
-    // console.log("creating table");
+    const startTime = performance.now();
+    var loader = document.getElementById("loading");
+    var loading = false;
+    if(loader.style.display == "none") {
+        displayLoader(1);
+        loading = true;
+    }
+    console.log("creating table");
     var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontentT");
+    tabcontent = document.getElementsByClassName("tabletabcontent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
 
-    tablinks = document.getElementsByClassName("tablinksT");
+    tablinks = document.getElementsByClassName("tabletablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
@@ -30,16 +38,20 @@ function CreateTable(evt, type) {
     var fileUpload = type == 1 ? document.getElementById("data_file") : document.getElementById("data_log");
     if(fileUpload.value == "") {
         alert("Please upload a file!")
+        if(loading) {displayLoader(2);}
         return;
     }
     else if(evt == null || evt == undefined) {
+        if(loading) {displayLoader(2);}
         return;
     }
 
-    var dvTBL = type == 1 ? document.getElementById("data_table") : document.getElementById("log_table");
-    dvTBL.style.display = "table";
+    var tabletabcontent = type == 1 ? document.getElementById("data_table") : document.getElementById("log_table");
+    console.log(tabletabcontent);
+    tabletabcontent.style.display = "table";
+    console.log(tabletabcontent);
     evt.target.className += " active";
-    if (typeof (FileReader) != "undefined") {
+    if (typeof(FileReader) != "undefined") {
         var reader = new FileReader();
         reader.onload = function (e) {
             var table = document.createElement("table");
@@ -53,13 +65,10 @@ function CreateTable(evt, type) {
                         cell.innerHTML = cells[j];
                     }
                 }
-                // console.log(i);
-                // updateProgress(i, rows.length);
             }
-            // updateProgress(0, rows.length);
-            var dvCSV = type == 1 ? document.getElementById("data_table_scroller") : document.getElementById("log_table_scroller");
-            dvCSV.innerHTML = "";
-            dvCSV.appendChild(table);
+            var scroller = type == 1 ? document.getElementById("data_table_scroller") : document.getElementById("log_table_scroller");
+            scroller.innerHTML = "";
+            scroller.appendChild(table);
         }
         reader.readAsText(fileUpload.files[0]);
     } 
@@ -67,18 +76,8 @@ function CreateTable(evt, type) {
         alert("This browser does not support HTML5.");
         return;
     }
-
-    // doClick(type, 1);
-    // console.log("finished creating table");
+    console.log("finished creating table");
+    if(loading) {displayLoader(2);}
+    const duration = performance.now() - startTime;
+    console.log("CreateTable took " + duration + " ms");
 }
-
-// function updateProgress(row, length) {
-//     var width = Math.round((row*100)/length);
-//     //console.log(width);
-//     var elem = document.getElementById("bar");
-//     elem.setAttribute("style", "width: "+ width + "%");
-//     // console.log(elem.style.width);
-//     if(width == 0) {
-//         console.log(elem.style.width);
-//     }
-// }
