@@ -5,7 +5,7 @@ function populateLists(evt, type, results) {
 	}
 	console.log("populating lists");
 	var headers = results.data[0];
-	var selects = type == 1 ? document.getElementsByClassName("lineboxD") : document.getElementsByClassName("lineboxL");
+	var selects = type == 1 ? document.getElementsByClassName("datalinebox") : document.getElementsByClassName("loglinebox");
 
 	for (var i = 0; i < selects.length; i++) { 
 		var select = selects[i];
@@ -34,9 +34,10 @@ function populateLists(evt, type, results) {
 }
 
 function createGraph(type, results) {
+	const startTime = performance.now();
 	console.log("creating graph");
 	var data = results.data;
-	var lines = type == 1 ? document.getElementsByClassName("lineboxD") : document.getElementsByClassName("lineboxL") ;
+	var lines = type == 1 ? document.getElementsByClassName("datalinebox") : document.getElementsByClassName("loglinebox") ;
 	var indices = [];
 	for(var i = 0; i < lines.length; i++) {
 		indices.push(lines[i].selectedIndex);
@@ -74,6 +75,9 @@ function createGraph(type, results) {
 	var chart = type == 1 ? document.getElementById("data_chart") : document.getElementById("log_chart");
 	c3.generate({
 		bindto: chart,
+		transition: {
+			duration: 0
+		},
 		padding: {
 			bottom: 20
 		},
@@ -94,7 +98,7 @@ function createGraph(type, results) {
                 	culling: {
                     	max: 7
                 	},
-					fit: true
+					fit: false
             	},
 				label: {
 					text: "Time",
@@ -113,9 +117,13 @@ function createGraph(type, results) {
 
 	// doClick(type, 2);
 	console.log("finished creating graph");
+	const duration = performance.now() - startTime;
+    console.log("createGraph took " + duration + " ms");
+	displayLoader(2);
 }
 
 function parseData(type, func, evt) {
+	const startTime = performance.now();
 	console.log("parsing data");
 	var loader = document.getElementById("loading");
     var loading = false;
@@ -129,15 +137,15 @@ function parseData(type, func, evt) {
         alert("Please upload a file!")
 		if(loading) {displayLoader(2);}
         return;
-	}
+	} 
 
 	var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontentG");
+    tabcontent = document.getElementsByClassName("graphtabcontent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
 
-    tablinks = document.getElementsByClassName("tablinksG");
+    tablinks = document.getElementsByClassName("graphtablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
@@ -158,11 +166,14 @@ function parseData(type, func, evt) {
 				// if(func == 1) {
 					populateLists(evt, type, results);
 					createGraph(type, results);
-					displayLoader(2);
+					console.log("papaparse done");
+					// displayLoader(2);
 				// }
 			}
 		});
 	}
 
 	console.log("finished parsing");
+	const duration = performance.now() - startTime;
+    console.log("parseData took " + duration + " ms");
 }
