@@ -181,7 +181,6 @@ function CreateTable(evt, type) {
 
     console.log("finished creating table");
     console.log("CreateTable took " + (performance.now() - startTime) + " ms");
-    displayLoader(2);
 }
 
 function setTableWidth(w) {
@@ -237,6 +236,7 @@ function populateLists(evt, type) {
 }
 
 function CreateGraph(evt, type) {
+    displayLoader(1);
 	const startTime = performance.now();
 	console.log("creating graph");
 
@@ -343,7 +343,7 @@ function CreateGraph(evt, type) {
 }
 
 function PrintError() {
-    var currentline = new Error().linenumber;
+    var currentline = console.trace();
     console.log("error at line " + currentline);
     displayLoader(2);
     throw new Error("error at line " + currentline);
