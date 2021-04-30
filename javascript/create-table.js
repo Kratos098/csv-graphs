@@ -25,10 +25,10 @@ function UpdateTabs() {
 
     var datafile = document.getElementById("data_file").files[0];
     if(datafile == undefined) {
-        tabletablinks[0].className =  tabletablinks[0].className.replace(" active", "");
-        tabletablinks[0].disabled = true;
-        graphtablinks[0].className =  graphtablinks[0].className.replace(" active", "");
-        graphtablinks[0].disabled = true;
+        tabletablinks[0].className = tabletablinks[0].className.replace(" active", "");
+        tabletablinks[0].disabled  = true;
+        graphtablinks[0].className = graphtablinks[0].className.replace(" active", "");
+        graphtablinks[0].disabled  = true;
     }
     else {
         tabletablinks[0].disabled = false;
@@ -38,9 +38,9 @@ function UpdateTabs() {
     var datalog = document.getElementById("data_log").files[0];
     if(datalog == undefined) {
         tabletablinks[1].className =  tabletablinks[0].className.replace(" active", "");
-        tabletablinks[1].className += " disabled";
+        tabletablinks[1].disabled  = true;
         graphtablinks[1].className =  graphtablinks[0].className.replace(" active", "");
-        graphtablinks[1].className += " disabled";
+        graphtablinks[1].disabled  = true;
     }
     else {
         tabletablinks[1].disabled = false;
