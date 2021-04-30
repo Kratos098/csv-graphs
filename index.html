@@ -18,8 +18,7 @@
 		<script src="javascript/library/papaparse.min.js"></script> 
 
 		<!-- Load create-table.js and create-graph.js -->
-		<script src="javascript/create-table.js"></script>
-		<script src="javascript/create-graph.js"></script>
+		<script src="javascript/main.js"></script>
   	</head>
 
   	<body>
@@ -53,8 +52,8 @@
 			<fieldset class="li-border" id="tableborder">
 				<legend>Tables</legend>
 				<div class="tab">
-					<button disabled class="tabletablinks" onclick="CreateTable(event, 1)" id="data_table_button">Data File Table</button>
-					<button disabled class="tabletablinks" onclick="CreateTable(event, 2)" id="log_table_button">Data Log Table</button>
+					<button disabled class="tabletablinks" onclick="DisplayTable(event, 1)" id="data_table_button">Data File Table</button>
+					<button disabled class="tabletablinks" onclick="DisplayTable(event, 2)" id="log_table_button">Data Log Table</button>
 				</div>
 				<div class="tabletabcontent" id="data_table">
 					<div class="scroller" id="data_table_scroller"></div>
@@ -70,21 +69,21 @@
 				<legend>Graphs</legend>
 					<!-- https://www.geeksforgeeks.org/how-to-create-a-dropdown-list-with-array-values-using-javascript/ -->
 					<div class="tab">
-						<button disabled class="graphtablinks" id="data_graph_button" onclick="parseData(1, 1, event)">Data File Graph</button>
-						<button disabled class="graphtablinks" id="log_graph_button"  onclick="parseData(2, 1, event)">Data Log Graph</button> 
+						<button disabled class="graphtablinks" id="data_graph_button" onclick="CreateGraph(event, 1)">Data File Graph</button>
+						<button disabled class="graphtablinks" id="log_graph_button"  onclick="CreateGraph(event, 2)">Data Log Graph</button> 
 					</div>
 					<div class="graphtabcontent" id="data_graph">
 						<select class="datalinebox" id="dataline1"></select>
 						<select class="datalinebox" id="dataline2"></select>
 						<select class="datalinebox" id="dataline3"></select>
-						<button id="draw_data_graph" onclick="parseData(1, 2, event)">Graph</button>
+						<button id="draw_data_graph" onclick="CreateGraph(event, 1)">Graph</button>
 						<div id="data_chart"></div>
 					</div>
 					<div class="graphtabcontent" id="log_graph">
 						<select class="loglinebox" id="logline1"></select>
 						<select class="loglinebox" id="logline2"></select>
 						<select class="loglinebox" id="logline3"></select>
-						<button id="draw_log_graph" onclick="parseData(2, 2, event)">Graph</button>
+						<button id="draw_log_graph" onclick="CreateGraph(event, 2)">Graph</button>
 						<div id="log_chart"></div>
 					</div> 
 			</fieldset>
@@ -113,7 +112,7 @@
 					console.log("displaying loader");
 					icon.style.display = "inline";
 				}
-				else if(type == 2) {
+				else if(type == 2 && uploading == false) {
 					console.log("hiding loader");
 					icon.style.display = "none";
 				}
